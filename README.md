@@ -33,12 +33,22 @@ Unfortunately if the loaded content contains some Javascript code it will not be
             console.info('content has been fetched from data.html');
             loadData(html, '#ajax-target').then(function (html) {
                 console.info('I\'m a callback');
-            })
+            });
         }).catch((error) => {
             console.log(error);
         });
     });
 </script>
+```
+
+Alternatively you can append the fetched content to the HTML container instead of replacing it:
+
+```javascript
+    // first fetch your content like in the first example above, then ...
+    // the third "true" argument will append the fetched content into the container instead of replacing its original content.
+    loadData(html, '#ajax-target', true).then(function (html) {
+        console.info('I\'m a callback');
+    });
 ```
 
 ## Authors

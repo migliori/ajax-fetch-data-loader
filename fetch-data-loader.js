@@ -32,8 +32,8 @@ var _htmlToElements = function (html) {
  * @param {string} container
  * @return {boolean} true on success after recursion
  */
-var _loadContent = function (data, index, container) {
-    if (index === 0) {
+var _loadContent = function (data, index, container, appendData) {
+    if (index === 0 && !appendData) {
         document.querySelector(container).innerHTML = '';
     }
     if (index <= data.length) {
@@ -70,8 +70,9 @@ var _loadContent = function (data, index, container) {
  *
  * @param {string} data the HTML/Javascript returned by fetch()
  * @param {string} container the container target selector. ie: '#ajax-target'
+ * @param {boolean} appendData choose whether to add the content to the end of the container or to replace it
  * @return {boolean} true on success
  */
-var loadData = async function (data, container) {
-    return _loadContent(_htmlToElements(data), 0, container);
+var loadData = async function (data, container, appendData = false) {
+    return _loadContent(_htmlToElements(data), 0, container, appendData);
 }
