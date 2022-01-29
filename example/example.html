@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+    <title>Load HTML and Javascript with Javascript fetch() function</title>
+  </head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="text-center mt-4">Fetch data loader</h1>
+
+        <h2 class="text-secondary font-weight-light text-center mb-5">Load HTML and Javascript with Javascript fetch() function</h2>
+
+        <p>The content of the data.html file is loaded in Ajax with the fetch() function, then displayed in the target container below.</p>
+
+        <p>Open your browser console to see the <code>console.log()</code> messages</p>
+
+        <hr class="my-5">
+        <div id="ajax-target" class="my-5 border p-4"></div>
+    </div>
+
+    <script src="../fetch-data-loader.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event) {
+            fetch('data.html')
+            .then(function (response) {
+                return response.text()
+            })
+            .then(function (html) {
+                console.info('content has been fetched from data.html');
+                loadData(html, '#ajax-target').then(function (html) {
+                    console.info('I\'m a callback');
+                })
+            }).catch((error) => {
+                console.log(error);
+            });
+        });
+    </script>
+</body>
+
+</html>
