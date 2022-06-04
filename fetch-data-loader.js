@@ -41,7 +41,14 @@ var _loadContent = function (data, index, container, appendData) {
         if (element !== undefined && element.nodeName === 'SCRIPT') {
             // output scripts
             var script = document.createElement('script');
-            script.type = 'text/javascript';
+            // copy type
+            if (element.type) {
+                script.type = element.type;
+            }
+            // clone attributes
+            Array.prototype.forEach.call(element.attributes, function (attr) {
+                script.setAttribute(attr.nodeName ,attr.nodeValue);
+            });
             if (element.src != '') {
                 script.src = element.src;
                 script.onload = function () {
